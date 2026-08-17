@@ -1,0 +1,11 @@
+SECURITY POLICY
+
+Employees must use strong passwords and must not share their passwords with other individuals.
+
+Multi-factor authentication must be enabled for company accounts where supported.
+
+Company confidential information must only be stored on approved company systems.
+
+Employees must immediately report suspected security incidents to the IT security team.
+
+Unauthorized software must not be installed on company-managed devices.
