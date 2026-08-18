@@ -19,7 +19,8 @@ def extract_mcp_result(result):
 def retriever_agent(state):
 
     query = state["query"]
-
+    attempts = state.get("retrieval_attempts", 0)
+    attempts += 1
     print("\n========== RETRIEVER AGENT ==========")
     print(f"Query: {query}")
 
@@ -63,5 +64,6 @@ def retriever_agent(state):
         contexts.append(doc.page_content)
 
     return {
-        "retrieved_context": contexts
+        "retrieved_context": contexts,
+        "retrieval_attempts": attempts,
     }

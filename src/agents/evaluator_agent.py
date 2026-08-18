@@ -1,4 +1,5 @@
 import os
+import math
 
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
@@ -51,26 +52,40 @@ def evaluator_agent(state: GraphState) -> GraphState:
         retrieved_contexts=contexts,
     )
 
+    dataset = EvaluationDataset(
+        samples=[sample]
+    )
+
     # -----------------------------------------
     # RAGAS evaluation
     # -----------------------------------------
 
-    dataset = EvaluationDataset(samples=[sample])
-
     result = evaluate(
-    dataset=dataset,
-    metrics=[
-        Faithfulness(),
-        ResponseRelevancy(strictness=1),
-    ],
-    llm=llm,
-    embeddings=embeddings,
+        dataset=dataset,
+        metrics=[
+            Faithfulness(),
+            ResponseRelevancy(strictness=1),
+        ],
+        llm=llm,
+        embeddings=embeddings,
     )
 
     scores = result.to_pandas().iloc[0].to_dict()
 
-    faithfulness = float(scores.get("faithfulness", 0.0))
-    answer_relevancy = float(scores.get("answer_relevancy", 0.0))
+    faithfulness = float(
+        scores.get("faithfulness", 0.0)
+    )
+
+    answer_relevancy = float(
+        scores.get("answer_relevancy", 0.0)
+    )
+
+    # Handle NaN
+    if math.isnan(faithfulness):
+        faithfulness = 0.0
+
+    if math.isnan(answer_relevancy):
+        answer_relevancy = 0.0
 
     # -----------------------------------------
     # Display scores
@@ -78,43 +93,74 @@ def evaluator_agent(state: GraphState) -> GraphState:
 
     print("\nRAGAS RESULTS")
     print("-------------------------")
-    print(f"Faithfulness:     {faithfulness:.4f}")
-    print(f"Answer Relevancy: {answer_relevancy:.4f}")
+
+    print(
+        f"Faithfulness:     {faithfulness:.4f}"
+    )
+
+    print(
+        f"Answer Relevancy: {answer_relevancy:.4f}"
+    )
 
     # -----------------------------------------
     # Interpretation
     # -----------------------------------------
 
     if faithfulness >= 0.8:
+
         faithfulness_text = (
-            "High - answer is well supported by the retrieved context."
+            "High - answer is well supported by "
+            "the retrieved context."
         )
+
     elif faithfulness >= 0.6:
+
         faithfulness_text = (
-            "Moderate - answer is mostly supported by the retrieved context."
+            "Moderate - answer is mostly supported "
+            "by the retrieved context."
         )
+
     else:
+
         faithfulness_text = (
-            "Low - answer may contain unsupported information."
+            "Low - answer may contain unsupported "
+            "information."
         )
 
     if answer_relevancy >= 0.8:
+
         relevancy_text = (
-            "High - answer directly addresses the user's question."
+            "High - answer directly addresses "
+            "the user's question."
         )
+
     elif answer_relevancy >= 0.6:
+
         relevancy_text = (
             "Moderate - answer is reasonably relevant."
         )
+
     else:
+
         relevancy_text = (
-            "Low - answer may not directly address the question."
+            "Low - answer may not directly address "
+            "the question."
         )
 
     print("\nINTERPRETATION")
     print("-------------------------")
-    print(f"Faithfulness: {faithfulness_text}")
-    print(f"Answer Relevancy: {relevancy_text}")
+
+    print(
+        f"Faithfulness: {faithfulness_text}"
+    )
+
+    print(
+        f"Answer Relevancy: {relevancy_text}"
+    )
+
+    # -----------------------------------------
+    # Return evaluation
+    # -----------------------------------------
 
     return {
         **state,
