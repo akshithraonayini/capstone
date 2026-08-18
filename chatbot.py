@@ -1,5 +1,10 @@
 from src.graph import graph
-
+import os
+import certifi
+import truststore
+os.environ["SSL_CERT_FILE"] = certifi.where()
+os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
+truststore.inject_into_ssl()
 
 def main():
 
