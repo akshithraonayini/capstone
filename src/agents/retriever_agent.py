@@ -1,5 +1,5 @@
 from mcp_client import call_mcp
-from rag.vectorstore import get_vectorstore
+from rag.vectorstore import get_vectorstore,create_vectorstore
 
 
 def extract_mcp_result(result):
@@ -47,9 +47,17 @@ def retriever_agent(state):
     retriever = vectorstore.as_retriever(
         search_kwargs={"k": 3}
     )
-
     retrieved_docs = retriever.invoke(query)
 
+    if(len(retrieved_docs)==0):
+        create_vectorstore()
+        
+    vectorstore = get_vectorstore()
+    
+    retriever = vectorstore.as_retriever(
+        search_kwargs={"k": 3}
+    )
+    retrieved_docs = retriever.invoke(query)
     print(
         f"\nRetrieved {len(retrieved_docs)} documents from Chroma"
     )
