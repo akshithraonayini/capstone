@@ -28,9 +28,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
     answer = state["answer"]
     contexts = state["retrieved_context"]
 
-    # -----------------------------------------
     # Groq LLM used by RAGAS
-    # -----------------------------------------
 
     llm = ChatGroq(
         model="openai/gpt-oss-120b",
@@ -38,9 +36,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
         api_key=os.getenv("GROQ_API_KEY"),
     )
 
-    # -----------------------------------------
     # Hugging Face embeddings
-    # -----------------------------------------
 
     embeddings = get_embeddings()
 
@@ -48,9 +44,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
     ragas_llm = LangchainLLMWrapper(llm)
     ragas_embeddings = LangchainEmbeddingsWrapper(embeddings)
 
-    # -----------------------------------------
     # Create RAGAS sample
-    # -----------------------------------------
 
     sample = SingleTurnSample(
         user_input=query,
@@ -110,9 +104,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
     if math.isnan(answer_relevancy):
         answer_relevancy = 0.0
 
-    # -----------------------------------------
     # Display scores
-    # -----------------------------------------
 
     print("\nRAGAS RESULTS")
     print("-------------------------")
@@ -125,9 +117,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
         f"Answer Relevancy: {answer_relevancy:.4f}"
     )
 
-    # -----------------------------------------
     # Interpretation
-    # -----------------------------------------
 
     if faithfulness >= 0.8:
 
@@ -181,10 +171,7 @@ def evaluator_agent(state: GraphState) -> GraphState:
         f"Answer Relevancy: {relevancy_text}"
     )
 
-    # -----------------------------------------
     # Return evaluation
-    # -----------------------------------------
-
     return {
         **state,
         "evaluation": {

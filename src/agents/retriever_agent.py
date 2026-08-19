@@ -24,9 +24,7 @@ def retriever_agent(state):
     print("\n========== RETRIEVER AGENT ==========")
     print(f"Query: {query}")
 
-    # ------------------------------------------------
     # MCP INTEGRATION
-    # ------------------------------------------------
 
     print("\n[MCP] Listing knowledge documents...")
 
@@ -38,9 +36,7 @@ def retriever_agent(state):
 
     print(f"[MCP] Available documents: {documents}")
 
-    # ------------------------------------------------
-    # RAG RETRIEVAL
-    # ------------------------------------------------
+    # RAG RETRIEVAL\
 
     vectorstore = get_vectorstore()
 

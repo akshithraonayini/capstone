@@ -30,9 +30,7 @@ def guardrail_agent(state: GraphState) -> GraphState:
 
     normalized_query = query.lower()
 
-    # -----------------------------
     # Prompt injection protection
-    # -----------------------------
 
     for pattern in BLOCKED_PATTERNS:
 
@@ -50,9 +48,7 @@ def guardrail_agent(state: GraphState) -> GraphState:
                 ),
             }
 
-    # -----------------------------
     # Sensitive information request
-    # -----------------------------
 
     for pattern in SENSITIVE_PATTERNS:
 

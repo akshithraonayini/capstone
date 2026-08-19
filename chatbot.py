@@ -5,11 +5,6 @@ import truststore
 
 from src.graph import graph
 
-
-# ------------------------------------------------
-# SSL configuration
-# ------------------------------------------------
-
 os.environ["SSL_CERT_FILE"] = certifi.where()
 os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
 
@@ -23,10 +18,6 @@ def main():
     print("=" * 50)
     print("Type 'exit' to quit.")
     print()
-
-    # ------------------------------------------------
-    # Conversation / SQLite checkpoint thread
-    # ------------------------------------------------
 
     thread_id = "employee_001"
 
@@ -52,10 +43,6 @@ def main():
         if not query:
             continue
 
-        # ------------------------------------------------
-        # Invoke LangGraph
-        # ------------------------------------------------
-
         state = {
             "query": query
         }
@@ -64,10 +51,6 @@ def main():
             state,
             config=config
         )
-
-        # ------------------------------------------------
-        # Guardrail blocked
-        # ------------------------------------------------
 
         if result.get("guardrail_blocked", False):
 
@@ -87,19 +70,11 @@ def main():
 
             continue
 
-        # ------------------------------------------------
-        # Normal answer
-        # ------------------------------------------------
-
         print("\nAssistant:")
         print(result.get(
             "answer",
             "I couldn't generate an answer."
         ))
-
-        # ------------------------------------------------
-        # Evaluation information
-        # ------------------------------------------------
 
         evaluation = result.get("evaluation")
 

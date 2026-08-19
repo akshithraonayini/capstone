@@ -10,17 +10,11 @@ from agents.retriever_agent import retriever_agent
 from agents.response_agent import response_agent
 from agents.evaluator_agent import evaluator_agent
 
-
-# ============================================================
 # BUILD GRAPH
-# ============================================================
 
 builder = StateGraph(GraphState)
 
-
-# ============================================================
 # NODES
-# ============================================================
 
 builder.add_node(
     "guardrail",
@@ -42,20 +36,14 @@ builder.add_node(
     evaluator_agent
 )
 
-
-# ============================================================
 # START → GUARDRAIL
-# ============================================================
 
 builder.add_edge(
     START,
     "guardrail"
 )
 
-
-# ============================================================
 # GUARDRAIL ROUTER
-# ============================================================
 
 def guardrail_router(state: GraphState):
 
@@ -88,20 +76,14 @@ builder.add_conditional_edges(
     },
 )
 
-
-# ============================================================
 # RETRIEVER → RESPONSE
-# ============================================================
 
 builder.add_edge(
     "retriever",
     "response"
 )
 
-
-# ============================================================
 # RESPONSE → EVALUATOR
-# ============================================================
 
 builder.add_edge(
     "response",
@@ -109,9 +91,7 @@ builder.add_edge(
 )
 
 
-# ============================================================
 # RAGAS ROUTER
-# ============================================================
 
 def ragas_router(state: GraphState):
 
@@ -149,15 +129,11 @@ def ragas_router(state: GraphState):
         f"Retrieval Attempts: {attempts}"
     )
 
-    # ------------------------------------------------
     # Threshold
-    # ------------------------------------------------
 
     threshold = 0.7
 
-    # ------------------------------------------------
     # Good evaluation
-    # ------------------------------------------------
 
     if (
         faithfulness >= threshold
@@ -171,9 +147,7 @@ def ragas_router(state: GraphState):
 
         return "end"
 
-    # ------------------------------------------------
     # Maximum retry protection
-    # ------------------------------------------------
 
     if attempts >= 2:
 
@@ -183,9 +157,7 @@ def ragas_router(state: GraphState):
 
         return "end"
 
-    # ------------------------------------------------
     # Low score → retrieve again
-    # ------------------------------------------------
 
     print(
         "[ROUTER] RAGAS LOW → RETRY RETRIEVAL"
@@ -193,10 +165,7 @@ def ragas_router(state: GraphState):
 
     return "retry"
 
-
-# ============================================================
 # EVALUATOR → CONDITIONAL ROUTING
-# ============================================================
 
 builder.add_conditional_edges(
     "evaluator",
@@ -208,11 +177,7 @@ builder.add_conditional_edges(
         "end": END,
     },
 )
-
-
-# ============================================================
 # SQLITE CHECKPOINTER
-# ============================================================
 
 _stack = ExitStack()
 
@@ -221,11 +186,7 @@ checkpointer = _stack.enter_context(
         "chatbot.db"
     )
 )
-
-
-# ============================================================
 # COMPILE
-# ============================================================
 
 graph = builder.compile(
     checkpointer=checkpointer
