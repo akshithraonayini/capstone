@@ -92,7 +92,7 @@ capstone/
 - **[uv](https://docs.astral.sh/uv/)** for dependency management and running
 - A **Groq API key** (free tier available at [console.groq.com](https://console.groq.com))
 
----
+--
 
 ## Setup
 
