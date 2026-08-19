@@ -1,11 +1,201 @@
-SECURITY POLICY
+Copilot said:
+Comprehensive Information Security Policy
+1. Purpose
 
-Employees must use strong passwords and must not share their passwords with other individuals.
+The purpose of this Information Security Policy is to protect the confidentiality, integrity, and availability of company information, systems, networks, and digital assets. All employees, contractors, consultants, temporary staff, and third-party vendors are responsible for safeguarding company resources and complying with this policy. Failure to adhere to these requirements may result in disciplinary action, up to and including termination of employment or contract.
 
-Multi-factor authentication must be enabled for company accounts where supported.
+2. Password and Authentication Requirements
+2.1 Strong Passwords
 
-Company confidential information must only be stored on approved company systems.
+Employees must create and maintain strong passwords for all company accounts and systems. Passwords should:
 
-Employees must immediately report suspected security incidents to the IT security team.
+Be at least 12 characters long.
+Contain a combination of uppercase letters, lowercase letters, numbers, and special characters.
+Avoid common words, personal information, or predictable patterns.
+Be unique for each company account and not reused across multiple services.
+2.2 Password Protection
 
-Unauthorized software must not be installed on company-managed devices.
+To maintain account security:
+
+Passwords must never be shared with coworkers, managers, friends, family members, or third parties.
+Employees must not write passwords on paper or store them in unsecured locations.
+Approved password management tools should be used whenever possible.
+Suspected password compromise must be reported immediately to the IT Security Team.
+2.3 Multi-Factor Authentication (MFA)
+
+Multi-factor authentication must be enabled on all supported company systems and applications. Employees must:
+
+Register approved authentication methods.
+Keep authentication devices secure.
+Report lost or stolen authentication devices immediately.
+Never approve authentication requests they did not initiate.
+3. Data Protection and Confidential Information
+3.1 Handling Confidential Data
+
+Company confidential information includes customer data, employee records, financial information, intellectual property, business strategies, and any material designated as sensitive.
+
+Employees must:
+
+Access confidential information only when required for their job responsibilities.
+Follow the principle of least privilege.
+Protect sensitive information from unauthorized access, disclosure, modification, or destruction.
+3.2 Approved Storage Locations
+
+Confidential information may only be stored, processed, or transmitted using approved company systems and services.
+
+Employees must not:
+
+Store company information on personal devices without authorization.
+Use personal cloud storage services for business data.
+Transfer sensitive information through unauthorized communication channels.
+3.3 Data Sharing
+
+Before sharing confidential information:
+
+Verify recipient identity.
+Ensure the recipient has appropriate authorization.
+Use approved encrypted communication methods where required.
+Follow data classification and retention requirements.
+4. Device and Endpoint Security
+4.1 Company-Managed Devices
+
+Company-managed devices must be used in accordance with security standards.
+
+Employees must:
+
+Keep operating systems and software up to date.
+Allow automatic security updates to be installed.
+Use approved antivirus and endpoint protection software.
+Lock devices when unattended.
+4.2 Unauthorized Software
+
+Installation of unauthorized software on company devices is strictly prohibited.
+
+Employees must not:
+
+Download software from untrusted sources.
+Install applications without required approvals.
+Circumvent security controls or administrative restrictions.
+Use pirated or unlicensed software.
+
+Any software required for business purposes must be reviewed and approved by IT before installation.
+
+4.3 Mobile Device Security
+
+Employees accessing company resources from mobile devices must:
+
+Enable device passwords or biometric authentication.
+Keep devices updated with the latest security patches.
+Report lost or stolen devices immediately.
+Allow remote wipe capabilities when required.
+5. Acceptable Use of Company Resources
+
+Employees must use company technology resources responsibly and professionally.
+
+Acceptable use includes:
+
+Conducting legitimate business activities.
+Complying with company policies and legal requirements.
+Protecting company assets from misuse.
+
+Prohibited activities include:
+
+Accessing unauthorized systems or data.
+Downloading malicious or illegal content.
+Attempting to disable security controls.
+Using company systems for unlawful activities.
+Sharing corporate information with unauthorized individuals.
+6. Email and Communication Security
+
+Email remains one of the primary attack vectors for cyber threats. Employees must:
+
+Verify sender identities before responding to requests.
+Exercise caution when opening attachments or clicking links.
+Report suspicious emails immediately.
+Avoid sending sensitive information through unsecured channels.
+
+Employees must never:
+
+Share login credentials through email.
+Respond to suspicious requests for confidential information.
+Forward sensitive company information without authorization.
+7. Incident Reporting and Response
+7.1 Reporting Security Incidents
+
+Employees must immediately report any suspected or confirmed security incident to the IT Security Team.
+
+Examples include:
+
+Phishing attempts.
+Malware infections.
+Lost or stolen devices.
+Unauthorized access attempts.
+Accidental disclosure of confidential information.
+Suspicious system behavior.
+7.2 Employee Responsibilities During an Incident
+
+Employees should:
+
+Stop using affected systems if instructed.
+Preserve relevant information.
+Report all known details promptly.
+Cooperate with incident investigations.
+Follow guidance from the IT Security Team.
+
+Early reporting helps reduce organizational risk and supports timely containment and recovery.
+
+8. Remote Work Security
+
+Employees working remotely must:
+
+Connect through approved secure networks.
+Use company-provided VPN services when required.
+Avoid conducting company business over public Wi-Fi without protection.
+Secure work devices from unauthorized access.
+
+Confidential conversations should not occur in public locations where sensitive information may be overheard.
+
+9. Physical Security
+
+Employees must:
+
+Wear company identification badges when required.
+Prevent unauthorized individuals from accessing secure areas.
+Secure documents containing sensitive information.
+Lock workstations before leaving their desks.
+Follow clean desk practices to protect confidential information.
+
+Visitors must be escorted and comply with company security procedures.
+
+10. Security Awareness and Training
+
+All personnel must participate in required security awareness programs.
+
+Training topics may include:
+
+Password security.
+Social engineering awareness.
+Phishing prevention.
+Data protection requirements.
+Secure use of company technology.
+Incident reporting procedures.
+
+Employees are expected to remain informed about current security threats and best practices.
+
+11. Compliance and Enforcement
+
+Compliance with this policy is mandatory. Violations may result in:
+
+Formal warnings.
+Suspension of system access.
+Disciplinary action.
+Termination of employment or contract.
+Legal action where applicable.
+
+Management and the IT Security Team may perform periodic audits to verify compliance with security requirements.
+
+12. Policy Review
+
+This policy will be reviewed periodically and updated as necessary to address evolving business requirements, regulatory obligations, and emerging cybersecurity threats. Employees are responsible for reviewing and complying with the latest version of the policy.
+
+Policy Statement: Security is a shared responsibility. Every employee plays a critical role in protecting company information, systems, customers, and business operations from cybersecurity threats. Adherence to this policy helps maintain a secure and trustworthy environment for all stakeholders.

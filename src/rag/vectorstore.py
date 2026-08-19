@@ -36,7 +36,20 @@ class FastEmbedEmbeddings(Embeddings):
 
 
 def get_embeddings():
-    return FastEmbedEmbeddings()
+    return _get_cached_embeddings()
+
+
+# The FastEmbed ONNX model is expensive to construct, so build it once and
+# reuse it. The retriever, vectorstore, and RAGAS evaluator all share this
+# single instance instead of reloading the model on every call.
+_EMBEDDINGS_SINGLETON = None
+
+
+def _get_cached_embeddings():
+    global _EMBEDDINGS_SINGLETON
+    if _EMBEDDINGS_SINGLETON is None:
+        _EMBEDDINGS_SINGLETON = FastEmbedEmbeddings()
+    return _EMBEDDINGS_SINGLETON
 
 
 def create_vectorstore():
@@ -51,6 +64,11 @@ def create_vectorstore():
         persist_directory=PERSIST_DIRECTORY,
     )
 
+    # Refresh the cached handle so subsequent get_vectorstore() calls see
+    # the freshly built index instead of a stale (possibly empty) one.
+    global _VECTORSTORE_SINGLETON
+    _VECTORSTORE_SINGLETON = vectorstore
+
     return vectorstore
 
 
@@ -59,11 +77,14 @@ def get_vectorstore():
     Load the existing Chroma vector database.
     """
 
-    embeddings = get_embeddings()
+    global _VECTORSTORE_SINGLETON
+    if _VECTORSTORE_SINGLETON is None:
+        _VECTORSTORE_SINGLETON = Chroma(
+            persist_directory=PERSIST_DIRECTORY,
+            embedding_function=get_embeddings(),
+        )
 
-    vectorstore = Chroma(
-        persist_directory=PERSIST_DIRECTORY,
-        embedding_function=embeddings,
-    )
+    return _VECTORSTORE_SINGLETON
 
-    return vectorstore
+
+_VECTORSTORE_SINGLETON = None

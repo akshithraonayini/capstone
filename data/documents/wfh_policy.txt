@@ -1,11 +1,167 @@
-WORK FROM HOME POLICY
+Comprehensive Work From Home (WFH) Policy
+1. Purpose
 
-Employees may work from home for up to 8 working days per month, subject to manager approval.
+The purpose of this Work From Home (WFH) Policy is to provide employees with flexibility while ensuring business continuity, productivity, security, and effective collaboration. This policy establishes guidelines and expectations for employees who perform their duties remotely and outlines the responsibilities associated with working outside the office environment.
 
-Work-from-home requests should be submitted through the company's internal request system.
+2. Eligibility
 
-Employees working remotely must remain available during standard working hours.
+Work-from-home arrangements may be available to eligible employees based on business requirements, job responsibilities, performance standards, and manager approval.
 
-Employees must have a reliable internet connection and maintain appropriate data security while working remotely.
+Eligibility for remote work may be reviewed periodically and may be modified, suspended, or withdrawn at the discretion of management based on operational needs.
 
-Sensitive company information must not be accessed from unauthorized devices.
+3. Work From Home Entitlement
+
+Employees may work from home for up to 8 working days per calendar month, subject to prior approval from their reporting manager.
+
+Key guidelines include:
+
+Unused WFH days cannot be carried forward to subsequent months unless expressly approved by management.
+Business priorities may require employees to work from the office even when WFH days are available.
+Additional remote work beyond the monthly allowance may require exceptional approval from department leadership or Human Resources.
+The company reserves the right to modify WFH limits based on organizational needs.
+4. Request and Approval Process
+
+Employees wishing to work remotely must submit their requests through the company's approved internal request management system.
+
+Employees should:
+
+Submit requests in advance whenever possible.
+Provide accurate dates and reasons for remote work.
+Obtain required manager approval before working remotely.
+Follow all departmental procedures regarding attendance and scheduling.
+
+Managers may approve or decline requests based on project requirements, workload distribution, customer commitments, team collaboration needs, and business priorities.
+
+5. Working Hours and Availability
+
+Employees working remotely are expected to maintain the same level of professionalism, productivity, and responsiveness as when working from the office.
+
+Employees must:
+
+Remain available during standard business hours.
+Attend scheduled meetings, training sessions, and client interactions.
+Respond to emails, messages, and work-related communications in a timely manner.
+Notify their manager if they expect any delay, absence, or disruption in availability.
+Maintain accurate attendance records in accordance with company procedures.
+
+Employees should not use work-from-home arrangements to manage personal responsibilities that interfere with their work commitments.
+
+6. Productivity and Performance Expectations
+
+Working remotely does not alter job responsibilities or performance expectations.
+
+Employees are expected to:
+
+Complete assigned tasks within established deadlines.
+Meet individual and team performance objectives.
+Actively participate in virtual collaboration activities.
+Maintain high standards of work quality and professionalism.
+Communicate progress and challenges proactively to supervisors.
+
+Performance concerns may result in review or suspension of remote work privileges.
+
+7. Remote Work Environment
+
+Employees are responsible for maintaining a professional and productive workspace while working remotely.
+
+The designated workspace should:
+
+Be quiet and free from excessive distractions.
+Support productive work activities.
+Provide appropriate lighting, seating, and ergonomic conditions.
+Protect confidential company information from unauthorized viewing or access.
+
+The company may provide guidance regarding recommended home office practices and workplace ergonomics.
+
+8. Technology and Internet Requirements
+
+Employees working remotely must ensure they have access to reliable technology and internet connectivity necessary to perform their duties effectively.
+
+Employees must:
+
+Maintain a stable and secure internet connection.
+Ensure company-issued devices remain operational and updated.
+Use company-approved software and communication tools.
+Promptly report technical issues affecting productivity.
+Keep work equipment protected from damage, theft, or misuse.
+
+In the event of prolonged internet outages or technical issues, employees should immediately inform their manager and follow alternative work arrangements as directed.
+
+9. Information Security and Data Protection
+
+Protecting company information remains a critical responsibility during remote work.
+
+Employees must:
+
+Access company systems only through authorized methods.
+Use company-approved devices whenever possible.
+Follow all security, privacy, and confidentiality requirements.
+Secure devices with strong passwords and multi-factor authentication.
+Lock devices when unattended.
+Store business information only on approved company systems.
+
+Employees must not:
+
+Access sensitive company information from unauthorized devices.
+Share company credentials with any individual.
+Download confidential data to personal devices or storage services.
+Use unsecured public Wi-Fi networks without approved security measures.
+Allow household members or unauthorized individuals to access company equipment or information.
+
+Any suspected security incident must be reported immediately to the IT Security Team.
+
+10. Confidentiality
+
+Employees must maintain the confidentiality of company information while working remotely.
+
+This includes:
+
+Protecting customer, employee, and business data.
+Preventing unauthorized viewing of sensitive information.
+Conducting confidential discussions in private settings.
+Properly securing work-related documents and electronic records.
+
+Employees remain bound by all confidentiality agreements and company information security policies while working remotely.
+
+11. Communication and Collaboration
+
+Effective communication is essential for successful remote work.
+
+Employees are expected to:
+
+Participate in virtual meetings and team discussions.
+Maintain active status on approved communication platforms during working hours.
+Keep managers informed regarding work progress and challenges.
+Collaborate effectively with colleagues, customers, and stakeholders.
+Follow established communication and escalation procedures.
+12. Health, Safety, and Well-Being
+
+Employees are encouraged to create a safe and healthy work environment.
+
+Employees should:
+
+Follow ergonomic best practices.
+Take appropriate breaks throughout the workday.
+Maintain work-life balance.
+Report any work-related health or safety concerns to their manager or Human Resources.
+
+The company may provide resources to support employee well-being while working remotely.
+
+13. Compliance and Policy Violations
+
+Failure to comply with this policy may result in:
+
+Revocation of work-from-home privileges.
+Performance management actions.
+Disciplinary measures in accordance with company policy.
+Additional corrective actions where necessary.
+
+Employees must comply with all company policies, procedures, and legal obligations while working remotely.
+
+14. Policy Review and Amendments
+
+The company reserves the right to review, modify, suspend, or discontinue this Work From Home Policy at any time based on business, operational, security, or regulatory requirements.
+
+Employees are responsible for familiarizing themselves with the latest version of the policy and complying with all applicable guidelines.
+
+Policy Statement: The company supports flexible work arrangements that promote productivity, employee well-being, and operational efficiency. Employees working from home are expected to maintain the same standards of professionalism, accountability, security, and performance as they would while working from the office.

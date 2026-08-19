@@ -1,21 +1,14 @@
-from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEndpointEmbeddings
+from .vectorstore import get_vectorstore
 
 
-PERSIST_DIRECTORY = "chroma_db"
+def get_retriever(k: int = 3):
+    """
+    Return a retriever backed by the persistent Chroma store and the same
+    local FastEmbed embeddings used everywhere else in the app. (Previously
+    this used a separate remote HuggingFace endpoint, which was inconsistent
+    with how the index is actually built.)
+    """
 
-
-def get_retriever():
-
-    embeddings = HuggingFaceEndpointEmbeddings(
-        model="sentence-transformers/all-MiniLM-L6-v2"
-    )
-
-    vectorstore = Chroma(
-        persist_directory=PERSIST_DIRECTORY,
-        embedding_function=embeddings,
-    )
-
-    return vectorstore.as_retriever(
-        search_kwargs={"k": 3}
+    return get_vectorstore().as_retriever(
+        search_kwargs={"k": k}
     )

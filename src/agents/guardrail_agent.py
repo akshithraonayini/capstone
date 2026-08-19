@@ -68,7 +68,12 @@ def guardrail_agent(state: GraphState) -> GraphState:
 
     print("[GUARDRAIL] Input passed")
 
+    # Reset the per-query retry counter here (the single graph entry node).
+    # The SQLite checkpointer persists state across turns on the same thread,
+    # so without this reset retrieval_attempts would accumulate across
+    # queries and permanently disable the RAGAS retry loop after a few turns.
     return {
         **state,
         "guardrail_blocked": False,
+        "retrieval_attempts": 0,
     }

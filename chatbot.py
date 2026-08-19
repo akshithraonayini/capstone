@@ -1,9 +1,18 @@
 import os
+import sys
 
 import certifi
 import truststore
 
 from src.graph import graph
+
+# Ensure the Windows console can print Unicode characters (e.g. non-breaking
+# hyphens) returned by the LLM without crashing on the default cp1252 codec.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
