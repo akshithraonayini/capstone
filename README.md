@@ -15,6 +15,7 @@ The assistant is available both as a **command-line chatbot** and a **Streamlit 
 - **Response agent** — answers strictly from retrieved context using **Groq** (`openai/gpt-oss-120b`), with conversation history awareness.
 - **RAGAS evaluation** — scores each answer for **Faithfulness** and **Answer Relevancy**; low scores trigger automatic retrieval retries (up to 2).
 - **Conversation memory** — LangGraph **SQLite checkpointer** persists chat history per thread.
+- **Observability (mandatory)** — every LLM call, retrieval, and agent step is traced to **LangSmith** for full end-to-end visibility (see [Observability](#observability)).
 - **Corporate-network friendly** — `truststore` + `certifi` SSL setup and a Google Cloud Storage mirror fallback for model downloads.
 
 ---
@@ -107,15 +108,17 @@ capstone/
    # Required — LLM provider
    GROQ_API_KEY=your_groq_api_key_here
 
-   # Optional — only needed if you enable LangSmith tracing
-   HF_TOKEN=your_huggingface_token
-   LANGSMITH_TRACING=false
+   # Required — observability / tracing (see the Observability section)
+   LANGSMITH_TRACING=true
    LANGSMITH_ENDPOINT=https://api.smith.langchain.com
    LANGSMITH_API_KEY=your_langsmith_key
    LANGSMITH_PROJECT=enterprise-knowledge-assistant
+
+   # Optional — Hugging Face token (model downloads on restricted networks)
+   HF_TOKEN=your_huggingface_token
    ```
 
-   > **Note:** Set `LANGSMITH_TRACING=false` if your network blocks `api.smith.langchain.com` (avoids SSL upload warnings). Never commit real secrets — `.env` is git-ignored.
+   > **Note:** Never commit real secrets — `.env` is git-ignored. If your network blocks `api.smith.langchain.com`, see the [Observability](#observability) section for how to keep tracing working.
 
 3. **Build the vector index** from the documents in `data/documents/`:
 
@@ -165,6 +168,41 @@ The MCP server automatically exposes any file in that directory through its tool
 
 ---
 
+## Observability
+
+Observability is a **mandatory** part of this project. Every run is fully traced with **LangSmith** so you can inspect exactly what each agent did — the guardrail decision, the documents retrieved, the prompt sent to Groq, the generated answer, and the RAGAS scoring calls — as a single connected trace tree.
+
+### What is captured
+
+- **End-to-end traces** of the LangGraph pipeline (guardrail → retriever → response → evaluator), including retrieval retries.
+- **LLM calls** — prompts, completions, token usage, and latency for every Groq invocation.
+- **Retrieval steps** — the query and the chunks returned from Chroma.
+- **Evaluation** — the RAGAS Faithfulness / Answer Relevancy metric runs.
+
+### Enabling it
+
+Set the following in `.env` (already listed in [Setup](#setup)):
+
+```dotenv
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT=https://api.smith.langchain.com
+LANGSMITH_API_KEY=your_langsmith_key
+LANGSMITH_PROJECT=enterprise-knowledge-assistant
+```
+
+Get an API key from [smith.langchain.com](https://smith.langchain.com). Traces appear under the project named in `LANGSMITH_PROJECT`.
+
+### Viewing traces
+
+1. Open [smith.langchain.com](https://smith.langchain.com) and select the `enterprise-knowledge-assistant` project.
+2. Each chatbot query produces one trace; click it to drill into every agent and LLM step, with inputs, outputs, latency, and token counts.
+
+### Networks that block LangSmith
+
+On restricted/corporate networks that block `api.smith.langchain.com`, trace uploads can emit SSL `CERTIFICATE_VERIFY_FAILED` warnings. These are non-fatal (answers still work). The app already applies a `truststore` + `certifi` SSL trust fix; if uploads still fail, either allowlist `api.smith.langchain.com` or temporarily set `LANGSMITH_TRACING=false` to silence the warnings while offline.
+
+---
+
 ## Tech stack
 
 | Concern            | Technology                                   |
@@ -175,6 +213,7 @@ The MCP server automatically exposes any file in that directory through its tool
 | Vector store       | Chroma (persistent)                          |
 | Tooling protocol   | MCP (FastMCP)                                |
 | Evaluation         | RAGAS (Faithfulness, Answer Relevancy)       |
+| Observability      | LangSmith tracing                            |
 | Conversation state | LangGraph SQLite checkpointer                |
 | Web UI             | Streamlit                                    |
 | Package management | uv                                           |
