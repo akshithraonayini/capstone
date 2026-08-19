@@ -1,11 +1,13 @@
 import os
 import math
+import asyncio
 
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 
-from ragas import evaluate
-from ragas.dataset_schema import SingleTurnSample, EvaluationDataset
+from ragas.dataset_schema import SingleTurnSample
+from ragas.llms import LangchainLLMWrapper
+from ragas.embeddings import LangchainEmbeddingsWrapper
 from ragas.metrics import (
     Faithfulness,
     ResponseRelevancy,
@@ -42,6 +44,10 @@ def evaluator_agent(state: GraphState) -> GraphState:
 
     embeddings = get_embeddings()
 
+    # Wrap for RAGAS
+    ragas_llm = LangchainLLMWrapper(llm)
+    ragas_embeddings = LangchainEmbeddingsWrapper(embeddings)
+
     # -----------------------------------------
     # Create RAGAS sample
     # -----------------------------------------
@@ -52,33 +58,50 @@ def evaluator_agent(state: GraphState) -> GraphState:
         retrieved_contexts=contexts,
     )
 
-    dataset = EvaluationDataset(
-        samples=[sample]
-    )
-
     # -----------------------------------------
     # RAGAS evaluation
+    #
+    # We score each metric directly via single_turn_ascore
+    # instead of ragas.evaluate(). The high-level evaluate()
+    # builds an EvaluationResult that parses callback traces,
+    # which crashes with "IndexError: list index out of range"
+    # (parse_run_traces) when the tracer collects no root trace.
+    # Direct scoring bypasses that path entirely and still
+    # returns the same numeric scores.
     # -----------------------------------------
 
-    result = evaluate(
-        dataset=dataset,
-        metrics=[
-            Faithfulness(),
-            ResponseRelevancy(strictness=1),
-        ],
-        llm=llm,
-        embeddings=embeddings,
+    faithfulness_metric = Faithfulness(llm=ragas_llm)
+    relevancy_metric = ResponseRelevancy(
+        llm=ragas_llm,
+        embeddings=ragas_embeddings,
+        strictness=1,
     )
 
-    scores = result.to_pandas().iloc[0].to_dict()
+    async def _score():
+        f = await faithfulness_metric.single_turn_ascore(sample)
+        r = await relevancy_metric.single_turn_ascore(sample)
+        return f, r
 
-    faithfulness = float(
-        scores.get("faithfulness", 0.0)
-    )
+    # Disable LangSmith tracing during scoring so scoring does not
+    # spam the console with "CERTIFICATE_VERIFY_FAILED" upload errors
+    # on networks that block api.smith.langchain.com.
+    saved_tracing = {
+        key: os.environ.get(key)
+        for key in ("LANGSMITH_TRACING", "LANGCHAIN_TRACING_V2")
+    }
+    for key in saved_tracing:
+        os.environ[key] = "false"
+    try:
+        faithfulness, answer_relevancy = asyncio.run(_score())
+    finally:
+        for key, value in saved_tracing.items():
+            if value is not None:
+                os.environ[key] = value
+            else:
+                os.environ.pop(key, None)
 
-    answer_relevancy = float(
-        scores.get("answer_relevancy", 0.0)
-    )
+    faithfulness = float(faithfulness)
+    answer_relevancy = float(answer_relevancy)
 
     # Handle NaN
     if math.isnan(faithfulness):
